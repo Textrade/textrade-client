@@ -1,0 +1,9 @@
+body {
+	margin: 0;
+	line-height: normal;
+}
+
+.textrade-navbar {
+	background-color: #1976D2;
+	color: white;
+}
