@@ -1,7 +1,7 @@
 module.exports = function () {
 	let targets = {
 		index_html: { flatten: true, cwd: 'resources/', src: 'index.html', dest: 'dist/' },
-		css: { flatten: true, cwd: 'resources/', src: 'css/*.css', dest: 'dist/css/' },
+		css: { flatten: true, cwd: 'resources/', src: 'css/*.css', dest: 'dist/css/' }
 		/*img: { flatten: true, cwd: 'resources/', src: 'img/*.*', dest: 'dist/img' },
 		fonts: { flatten: true, cwd: 'resources/', src: 'css/fonts/*.ttf', dest: 'dist/fonts' }*/
 	};
@@ -10,7 +10,7 @@ module.exports = function () {
 	let path = require("path");
 	let minimist = require('minimist');
 	let argv = minimist(process.argv.slice(2));
-	let target_names =Object.keys(targets);
+	let target_names = Object.keys(targets);
 
 	function copy_target(target) {
 		glob(target.src, { cwd: target.cwd }, (err, matches) => {
