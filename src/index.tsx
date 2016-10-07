@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import $ from "modules/jquery";
 import App from "components/App";
 import NoMatch from "components/NoMatch";

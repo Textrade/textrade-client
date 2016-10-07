@@ -3,7 +3,6 @@ import VBox from "components/ui/VBox";
 import HBox from "components/ui/HBox";
 import LoginService from "services/LoginService";
 import { Link, browserHistory } from "react-router";
-import FormEvent = __React.FormEvent;
 
 interface LoginState {
 	errorMessage?:string;
@@ -24,7 +23,7 @@ export default class Login extends React.Component<LoginProps, LoginState>{
 		}
 	}
 
-	handleLogin=(event:FormEvent)=> {
+	handleLogin=(event:React.FormEvent)=> {
 		event.preventDefault();
 		var username = this.userNameInput.value;
 		var password = this.passwordInput.value;
@@ -38,7 +37,7 @@ export default class Login extends React.Component<LoginProps, LoginState>{
 				});
 			}
 		}, function(e:Error) {
-			console.error("Error attempting to log into the server ", e);
+			console.error("Error attempting to log into the server.", e);
 		});
 	};
 
@@ -50,14 +49,14 @@ export default class Login extends React.Component<LoginProps, LoginState>{
 					<VBox className="textrade-login-dialog" style={{width: 350, height: 450, padding: 20, justifyContent: "space-between"}}>
 						<VBox className="textrade-login-dialog-logo" >
 							<Link to="/">
-								<img src="img/textrade-login-dialog-logo.png" style={{width: "100%"}}/>
+								<img src="/img/textrade-login-dialog-logo.png" style={{width: "100%"}}/>
 							</Link>
 						</VBox>
 						<form onSubmit={this.handleLogin}>
 							<VBox>
 								{this.state.errorMessage ? <span className="textrade-login-error-message">{this.state.errorMessage}</span> : null}
 								<input className="textrade-login-input" ref={(e:HTMLInputElement) => this.userNameInput = e} type="text" placeholder="username"/>
-								<input className="textrade-login-input" ref={(e:HTMLInputElement) => this.passwordInput = e} type="text" placeholder="password"/>
+								<input className="textrade-login-input" ref={(e:HTMLInputElement) => this.passwordInput = e} type="password" placeholder="password"/>
 								<button type="submit" className="btn btn-default textrade-login-button">
 									Login
 								</button>
