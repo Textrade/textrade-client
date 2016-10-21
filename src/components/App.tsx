@@ -37,10 +37,11 @@ export default class App extends React.Component<AppProps, AppState>
 
 	render() {
 		return (
-			<div>
+			<div style={{width: "100%", height: "100%"}}>
 				<NavBar/>
 				Hello {this.state.user}
 				{this.props.children}
+				<div style={{margin: 50}}></div>
 			</div>
 		);
 	}

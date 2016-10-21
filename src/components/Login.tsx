@@ -1,8 +1,9 @@
 import * as React from "react";
 import VBox from "components/ui/VBox";
 import HBox from "components/ui/HBox";
-import LoginService from "services/LoginService";
+import UserService from "services/UserService";
 import { Link, browserHistory } from "react-router";
+import {AuthenticationResult} from "services/UserService";
 
 interface LoginState {
 	errorMessage?:string;
@@ -27,8 +28,9 @@ export default class Login extends React.Component<LoginProps, LoginState>{
 		event.preventDefault();
 		var username = this.userNameInput.value;
 		var password = this.passwordInput.value;
-		LoginService.authenticate(username, password).then((result:boolean) => {
-			if(result)
+		UserService.authenticate(username, password).then((result:AuthenticationResult) => {
+			var authenticated = result.content;
+			if(authenticated)
 			{
 				browserHistory.push("/account");
 			} else {
@@ -69,7 +71,6 @@ export default class Login extends React.Component<LoginProps, LoginState>{
 						</form>
 					</VBox>
 				}
-
 			</VBox>
 		);
 	}
