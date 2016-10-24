@@ -2,16 +2,21 @@ import * as $ from "jquery";
 
 const POST:"POST" = "POST";
 const GET:"GET" = "GET";
+const UPDATE:"UPDATE" = "UPDATE";
 const PUT:"PUT" = "PUT";
 const OK = "200";
 
-declare type METHOD_TYPE = typeof POST|typeof GET|typeof PUT;
+declare type METHOD_TYPE = typeof POST|typeof GET|typeof PUT|typeof UPDATE;
 
 export interface APIResult {
 	status:string;
 	msg: string;
 	totalItems: number;
 	content: any;
+}
+
+export interface SuccessResult extends APIResult {
+	content: boolean;
 }
 
 export class TextradeService {
@@ -53,6 +58,10 @@ export class TextradeService {
 
 	public post(endpoint:string, params:{[key:string]: any}) {
 		return this.invokeService(POST, endpoint, params);
+	}
+
+	public update(endpoint:string, params:{[key:string]: any}) {
+		return this.invokeService(UPDATE, endpoint, params);
 	}
 
 	public put(endpoint:string, params:{[key:string]: any}) {

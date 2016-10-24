@@ -6,8 +6,15 @@ export class BookStatus {
 	static unavailable:"unavailable" = "unavailable";
 }
 
+export class BookCondition {
+	static new:"new" = "new";
+	static used:"used" = "used";
+}
+
+declare type BookCondition = typeof BookCondition.new | typeof BookCondition.used;
+
 /* generic interface for a book */
-interface Book {
+export interface Book {
 	/* id */
 	isbn: string;
 	description: string;
@@ -16,20 +23,20 @@ interface Book {
 	img_url: string;
 }
 
-interface BookInfo extends Book {
+export interface BookInfo extends Book {
 	user: string;
 	condition: string;
 }
 
 export interface BookResult extends BookInfo {
-	book_status: "available"|"unavailable"
+	book_status: typeof BookStatus.available | typeof BookStatus.unavailable
 }
 
 export interface SearchResult extends APIResult {
 	content: BookResult[]
 }
 
-interface RequestResult extends APIResult {
+export interface RequestResult extends APIResult {
 	content: boolean[]
 }
 
@@ -46,6 +53,10 @@ export default class BookService {
 
 	public static sellBookByUser(username:string, bookInfo:BookInfo) {
 		return TextradeService.post("sell/", {username, bookInfo})
+	}
+
+	public static requestBookFromUser(requestedBy:string, requestedFrom:string, isbn:string):Promise<RequestResult> {
+		return TextradeService.post("request/", {requestedBy, requestedFrom, isbn})
 	}
 
 	public static requestBookFromUser(requestedBy:string, requestedFrom:string, isbn:string):Promise<RequestResult> {
