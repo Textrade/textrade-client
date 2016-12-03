@@ -11,6 +11,7 @@ import UserAccount from "components/UserAccount";
 import Login from "components/Login";
 import ForgotPassword from "components/ForgotPassword";
 import Register from "components/Register";
+import Checkout from "components/Checkout";
 
 $(function() {
 	ReactDOM.render(
@@ -20,6 +21,7 @@ $(function() {
 				<Route path="sell" component={Sell}/>
 				<Route path="buy" component={Buy}/>
 				<Route path="account" component={UserAccount}/>
+				<Route path="checkout" component={Checkout}/>
 			</Route>
 			<Route path="login" component={Login}>
 				<Route path="forgotpassword" component={ForgotPassword}/>

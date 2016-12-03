@@ -34,6 +34,6 @@ export default class ListingService {
     }
 
     public static updateListing(username:string, updatedInfo:Listing):Promise<SuccessResult> {
-        return TextradeService.update("listings", {username, ...updatedInfo});
+        return TextradeService.put("listings", {username, ...updatedInfo});
     }
 }

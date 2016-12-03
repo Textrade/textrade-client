@@ -2,11 +2,11 @@ import * as $ from "jquery";
 
 const POST:"POST" = "POST";
 const GET:"GET" = "GET";
-const UPDATE:"UPDATE" = "UPDATE";
 const PUT:"PUT" = "PUT";
+const DELETE:"DELETE" = "DELETE";
 const OK = "200";
 
-declare type METHOD_TYPE = typeof POST|typeof GET|typeof PUT|typeof UPDATE;
+declare type METHOD_TYPE = typeof POST|typeof GET|typeof PUT|typeof DELETE;
 
 export interface APIResult {
 	status:string;
@@ -60,12 +60,12 @@ export class TextradeService {
 		return this.invokeService(POST, endpoint, params);
 	}
 
-	public update(endpoint:string, params:{[key:string]: any}) {
-		return this.invokeService(UPDATE, endpoint, params);
-	}
-
 	public put(endpoint:string, params:{[key:string]: any}) {
 		return this.invokeService(PUT, endpoint, params);
+	}
+
+	public delete(endpoint:string, params:{[key:string]: any}) {
+		return this.invokeService(DELETE, endpoint, params);
 	}
 }
 

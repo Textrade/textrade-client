@@ -26,7 +26,7 @@ export default class UserService {
 	}
 
 	public static updateUser(username:string, newInfo:UserInfo):Promise<SuccessResult> {
-		return TextradeService.update("users", {username, ...newInfo});
+		return TextradeService.put("users", {username, ...newInfo});
 	}
 
 	public static updatePassword(username:string, password:string):Promise<SuccessResult> {
