@@ -16,9 +16,18 @@ export class CheckoutStore {
 
 	}
 
-	addToCart(listing_id:number) {
-		var user_name = UserStore.getUser().username;
-		CheckoutService.addToCart(user_name, listing_id).then((result:CheckoutResult) => {
+	/* protected */ addToCart(listing_id:number) {
+		var username = UserStore.getUser().username;
+		CheckoutService.addToCart(username, listing_id).then((result:CheckoutResult) => {
+			this.cart.setSessionState(result.content);
+		}, (error:Error) => {
+			console.log(error);
+		});
+	}
+	
+	fetchCart() {
+		var username = UserStore.getUser().username;
+		return CheckoutService.getUserCart(username).then((result:CheckoutResult) => {
 			this.cart.setSessionState(result.content);
 		}, (error:Error) => {
 			console.log(error);
@@ -26,7 +35,7 @@ export class CheckoutStore {
 	}
 
 	public getCart():CartItem[] {
-		return this.cart.getSessionState() as CartItem[];
+		return this.cart.getSessionState() as CartItem[] || [];
 	}
 }
 

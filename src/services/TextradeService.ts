@@ -71,5 +71,5 @@ export class TextradeService {
 
 export default new TextradeService(
 	"http://127.0.0.1:5000/api/v1/",
-	"Token eyJleHAiOjMuMTU1NzYwMDAwMDE0NzU4ZSsyMCwiaWF0IjoxNDc1ODA4NjcyLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.bqtLKCuvwFzckdQU1XkzGVdVqi6cwtNFWHBxKsSJ324"
+	"Token eyJpYXQiOjE0ODA5OTExNzMsImFsZyI6IkhTMjU2IiwiZXhwIjozLjE1NTc2MDAwMDAxNDgxZSsyMH0.eyJpZCI6MX0.B-eNBjk_9mEB5HrIMEI0IpqQoMkY1w9LSRFsFzjNgas"
 );

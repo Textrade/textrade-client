@@ -1,5 +1,7 @@
 import * as React from "react";
-import HBox from "components/ui/HBox";
+import * as weavejs from "weavejs";
+import VBox = weavejs.ui.flexbox.VBox;
+import HBox = weavejs.ui.flexbox.HBox;
 import {Link} from "react-router";
 
 interface NavBarProps extends React.HTMLProps<NavBar> {

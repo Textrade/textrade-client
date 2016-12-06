@@ -1,5 +1,7 @@
 import * as React from "react";
-import VBox from "components/ui/VBox";
+import * as weavejs from "weavejs";
+import VBox = weavejs.ui.flexbox.VBox;
+import HBox = weavejs.ui.flexbox.HBox;
 import BookService from "services/BookService";
 import {BookResult} from "services/BookService";
 import {SearchResult} from "services/BookService";

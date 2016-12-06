@@ -6,12 +6,12 @@ export class BookStatus {
 	static unavailable:"unavailable" = "unavailable";
 }
 
-export class BookCondition {
-	static new:"new" = "new";
-	static used:"used" = "used";
+export class Condition {
+	static NEW:"new" = "new";
+	static USED:"used" = "used";
 }
 
-declare type BookCondition = typeof BookCondition.new | typeof BookCondition.used;
+export declare type BookCondition = typeof Condition.NEW | typeof Condition.USED;
 
 /* generic interface for a book */
 export interface Book {
@@ -53,10 +53,6 @@ export default class BookService {
 
 	public static sellBookByUser(username:string, bookInfo:BookInfo) {
 		return TextradeService.post("sell/", {username, bookInfo})
-	}
-
-	public static requestBookFromUser(requestedBy:string, requestedFrom:string, isbn:string):Promise<RequestResult> {
-		return TextradeService.post("request/", {requestedBy, requestedFrom, isbn})
 	}
 
 	public static requestBookFromUser(requestedBy:string, requestedFrom:string, isbn:string):Promise<RequestResult> {

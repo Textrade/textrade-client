@@ -1,6 +1,5 @@
 import TextradeService from "services/TextradeService";
 import {APIResult} from "services/TextradeService";
-import {Book, BookCondition} from "services/BookService";
 import {SuccessResult} from "services/TextradeService";
 
 export interface Sale {

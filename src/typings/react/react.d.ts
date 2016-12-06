@@ -1,6 +1,6 @@
 // Type definitions for React v0.14
 // Project: http://facebook.github.io/react/
-// Definitions by: Asana <https://asana.com>, AssureSign <http://www.assuresign.com>, Microsoft <https://microsoft.com>
+// Definitions by: Asana <https://asana.com>, AssureSign <http://www.assuresign.com>, Microsoft <https://microsoft.com>, John Reilly <https://github.com/johnnyreilly/>
 // Definitions: https://github.com/DefinitelyTyped/DefinitelyTyped
 
 declare namespace __React {
@@ -173,11 +173,13 @@ declare namespace __React {
         // on the existence of `children` in `P`, then we should remove this.
         props: P & { children?: ReactNode };
         state: S;
-        context: {};
+        context: any;
         refs: {
             [key: string]: ReactInstance
         };
     }
+
+    class PureComponent<P, S> extends Component<P, S> {}
 
     interface ClassicComponent<P, S> extends Component<P, S> {
         replaceState(nextState: S, callback?: () => any): void;
@@ -195,7 +197,7 @@ declare namespace __React {
 
     type SFC<P> = StatelessComponent<P>;
     interface StatelessComponent<P> {
-        (props?: P, context?: any): ReactElement<any>;
+        (props: P, context?: any): ReactElement<any>;
         propTypes?: ValidationMap<P>;
         contextTypes?: ValidationMap<any>;
         defaultProps?: P;
@@ -274,7 +276,10 @@ declare namespace __React {
         isTrusted: boolean;
         nativeEvent: Event;
         preventDefault(): void;
+        isDefaultPrevented(): boolean;
         stopPropagation(): void;
+        isPropagationStopped(): boolean;
+        persist(): void;
         target: EventTarget;
         timeStamp: Date;
         type: string;
@@ -1176,6 +1181,12 @@ declare namespace __React {
 
         imeMode?: any;
 
+        /**
+         * Defines how the browser distributes space between and around flex items
+         * along the main-axis of their container.
+         */
+        justifyContent?: "flex-start" | "flex-end" | "center" | "space-between" | "space-around";
+
         layoutGrid?: any;
 
         layoutGridChar?: any;
@@ -1963,7 +1974,6 @@ declare namespace __React {
         hrefLang?: string;
         htmlFor?: string;
         httpEquiv?: string;
-        icon?: string;
         id?: string;
         inputMode?: string;
         integrity?: string;
@@ -1995,6 +2005,7 @@ declare namespace __React {
         optimum?: number;
         pattern?: string;
         placeholder?: string;
+        playsInline?: boolean;
         poster?: string;
         preload?: string;
         radioGroup?: string;
@@ -2064,6 +2075,7 @@ declare namespace __React {
 
     interface SVGAttributes extends HTMLAttributes {
         clipPath?: string;
+        colorInterpolationFilters?: "auto" | "sRGB" | "linearRGB" | "inherit";
         cx?: number | string;
         cy?: number | string;
         d?: string;
@@ -2071,12 +2083,14 @@ declare namespace __React {
         dy?: number | string;
         fill?: string;
         fillOpacity?: number | string;
+        filter?: string;
         fontFamily?: string;
         fontSize?: number | string;
         fx?: number | string;
         fy?: number | string;
         gradientTransform?: string;
         gradientUnits?: string;
+        in?: string;
         markerEnd?: string;
         markerMid?: string;
         markerStart?: string;
@@ -2087,24 +2101,30 @@ declare namespace __React {
         points?: string;
         preserveAspectRatio?: string;
         r?: number | string;
+        result?: string;
         rx?: number | string;
         ry?: number | string;
         spreadMethod?: string;
+        stdDeviation?: number | string
         stopColor?: string;
         stopOpacity?: number | string;
         stroke?: string;
         strokeDasharray?: string;
-        strokeLinecap?: string;
+        strokeLinecap?: "butt" | "round" | "square" | "inherit";
+        strokeLinejoin?: "miter" | "round" | "bevel" | "inherit";
         strokeMiterlimit?: string;
         strokeOpacity?: number | string;
         strokeWidth?: number | string;
         textAnchor?: string;
         transform?: string;
+        type?: string;
+        values?: string;
         version?: string;
         viewBox?: string;
         x1?: number | string;
         x2?: number | string;
         x?: number | string;
+        xChannelSelector?: string;
         xlinkActuate?: string;
         xlinkArcrole?: string;
         xlinkHref?: string;
@@ -2114,10 +2134,15 @@ declare namespace __React {
         xlinkType?: string;
         xmlBase?: string;
         xmlLang?: string;
+        xmlns?: string;
+        xmlnsXlink?: string;
         xmlSpace?: string;
         y1?: number | string;
         y2?: number | string;
         y?: number | string;
+        yChannelSelector?: string;
+        z?: number | string;
+        zoomAndPan?: string;
     }
 
     //
@@ -2425,6 +2450,7 @@ declare namespace JSX {
         meta: React.HTMLProps<HTMLMetaElement>;
         meter: React.HTMLProps<HTMLElement>;
         nav: React.HTMLProps<HTMLElement>;
+        noindex: React.HTMLProps<HTMLElement>;
         noscript: React.HTMLProps<HTMLElement>;
         object: React.HTMLProps<HTMLObjectElement>;
         ol: React.HTMLProps<HTMLOListElement>;
@@ -2476,6 +2502,7 @@ declare namespace JSX {
         circle: React.SVGProps;
         clipPath: React.SVGProps;
         defs: React.SVGProps;
+        desc: React.SVGProps;
         ellipse: React.SVGProps;
         feBlend: React.SVGProps;
         feColorMatrix: React.SVGProps;
@@ -2484,14 +2511,21 @@ declare namespace JSX {
         feConvolveMatrix: React.SVGProps;
         feDiffuseLighting: React.SVGProps;
         feDisplacementMap: React.SVGProps;
+        feDistantLight: React.SVGProps;
         feFlood: React.SVGProps;
+        feFuncA: React.SVGProps;
+        feFuncB: React.SVGProps;
+        feFuncG: React.SVGProps;
+        feFuncR: React.SVGProps;
         feGaussianBlur: React.SVGProps;
         feImage: React.SVGProps;
         feMerge: React.SVGProps;
         feMergeNode: React.SVGProps;
         feMorphology: React.SVGProps;
         feOffset: React.SVGProps;
+        fePointLight: React.SVGProps;
         feSpecularLighting: React.SVGProps;
+        feSpotLight: React.SVGProps;
         feTile: React.SVGProps;
         feTurbulence: React.SVGProps;
         filter: React.SVGProps;
@@ -2500,7 +2534,9 @@ declare namespace JSX {
         image: React.SVGProps;
         line: React.SVGProps;
         linearGradient: React.SVGProps;
+        marker: React.SVGProps;
         mask: React.SVGProps;
+        metadata: React.SVGProps;
         path: React.SVGProps;
         pattern: React.SVGProps;
         polygon: React.SVGProps;
@@ -2508,9 +2544,12 @@ declare namespace JSX {
         radialGradient: React.SVGProps;
         rect: React.SVGProps;
         stop: React.SVGProps;
+        switch: React.SVGProps;
         symbol: React.SVGProps;
         text: React.SVGProps;
+        textPath: React.SVGProps;
         tspan: React.SVGProps;
         use: React.SVGProps;
+        view: React.SVGProps;
     }
 }

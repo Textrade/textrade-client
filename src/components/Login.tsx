@@ -1,9 +1,10 @@
 import * as React from "react";
-import VBox from "components/ui/VBox";
-import HBox from "components/ui/HBox";
+import * as weavejs from "weavejs";
 import UserService from "services/UserService";
 import { Link, browserHistory } from "react-router";
-import {AuthenticationResult} from "services/UserService";
+import VBox = weavejs.ui.flexbox.VBox;
+import HBox = weavejs.ui.flexbox.HBox;
+import {SuccessResult} from "services/TextradeService";
 
 interface LoginState {
 	errorMessage?:string;
@@ -28,7 +29,7 @@ export default class Login extends React.Component<LoginProps, LoginState>{
 		event.preventDefault();
 		var username = this.userNameInput.value;
 		var password = this.passwordInput.value;
-		UserService.authenticate(username, password).then((result:AuthenticationResult) => {
+		UserService.authenticate(username, password).then((result:SuccessResult) => {
 			var authenticated = result.content;
 			if(authenticated)
 			{

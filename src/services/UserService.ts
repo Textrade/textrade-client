@@ -26,10 +26,10 @@ export default class UserService {
 	}
 
 	public static updateUser(username:string, newInfo:UserInfo):Promise<SuccessResult> {
-		return TextradeService.put("users", {username, ...newInfo});
+		return TextradeService.put("users", _.merge({username}, newInfo));
 	}
 
 	public static updatePassword(username:string, password:string):Promise<SuccessResult> {
-		return TextradeService.put("users", {username, password})
+		return TextradeService.put("users", _.merge({username}, password));
 	}
 }

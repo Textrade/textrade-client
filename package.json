@@ -20,6 +20,7 @@
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
     "react-router": "^2.8.1",
+    "react-select": "^1.0.0-rc.2",
     "weavejs": "0.0.2"
   },
   "devDependencies": {

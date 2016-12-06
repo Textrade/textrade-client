@@ -1,3 +1,4 @@
+import * as React from "react";
 import {CartItem} from "services/CheckoutService";
 import CheckoutStore from "stores/CheckoutStore";
 import * as weavejs from "weavejs";
@@ -18,21 +19,24 @@ export default class Checkout extends React.Component<CheckoutProps, CheckoutSta
 
 	constructor(props:CheckoutProps) {
 		super(props);
-		this.state = this.getInitialState()
-	}
-
-	getInitialState():CheckoutState {
-		return {
+		this.state = {
 			items: CheckoutStore.getCart()
 		};
 	}
 
+	updateState() {
+		this.setState({
+			items: CheckoutStore.getCart()
+		});
+	}
+
 	componentDidMount() {
-		Weave.getCallbacks(CheckoutStore).addGroupedCallback(this, this.forceUpdate);
+		Weave.getCallbacks(CheckoutStore).addGroupedCallback(this, this.updateState);
+		console.log(CheckoutStore.fetchCart());
 	}
 
 	componentWillUnmount() {
-		Weave.getCallbacks(CheckoutStore).removeCallback(this, this.forceUpdate);
+		Weave.getCallbacks(CheckoutStore).removeCallback(this, this.updateState);
 	}
 
 	render() {

@@ -2,6 +2,7 @@ import TextradeService from "services/TextradeService";
 import {APIResult} from "services/TextradeService";
 import {Book, BookCondition} from "services/BookService";
 import {SuccessResult} from "services/TextradeService";
+import * as _ from "lodash";
 
 export interface Listing extends Book {
     id:number;
@@ -14,7 +15,7 @@ export interface Listing extends Book {
 }
 
 export interface ListingResult extends APIResult {
-    content:Listing[]
+    content:Listing[];
 }
 
 
@@ -30,10 +31,10 @@ export default class ListingService {
     }
 
     public static listNewBook(username:string, listingInfo:Listing):Promise<ListingResult> {
-        return TextradeService.post("listings", {username, ...listingInfo});
+        return TextradeService.post("listings", _.merge({username}, listingInfo));
     }
 
     public static updateListing(username:string, updatedInfo:Listing):Promise<SuccessResult> {
-        return TextradeService.put("listings", {username, ...updatedInfo});
+        return TextradeService.put("listings", _.merge({username}, updatedInfo));
     }
 }
